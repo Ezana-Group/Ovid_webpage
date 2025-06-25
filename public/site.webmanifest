@@ -1,0 +1,38 @@
+{
+  "name": "Ovid International Ltd - Leading Tech Company in Kenya",
+  "short_name": "Ovid International",
+  "description": "Kenya's premier technology company offering software development, 3D design, web & mobile apps, and IT services across East Africa.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0F2C",
+  "theme_color": "#00B4D8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "technology", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "ovidinternational"
+} 

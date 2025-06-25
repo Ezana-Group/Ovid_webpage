@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ovidinternational.com/sitemap.xml
+
+# Optimize crawl rate
+Crawl-delay: 1
+
+# Block common bot directories that may not be needed
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/static/
+Disallow: /node_modules/
+
+# Allow important assets
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.avif 
