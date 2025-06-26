@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, ArrowUp } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -54,7 +55,7 @@ const Footer = () => {
 
   const contactInfo = [
     { icon: Phone, text: '+254 700 123 456' },
-    { icon: Mail, text: 'info@ovidinternational.co.ke' },
+    { icon: Mail, text: 'info@ovid.co.ke' },
     { icon: MapPin, text: 'Nairobi, Kenya' }
   ]
 
@@ -67,7 +68,7 @@ const Footer = () => {
         }} />
       </div>
 
-      <div className="container-max section-padding relative z-10">
+      <div className="container-max relative z-10">
         {/* Main Footer Content */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
           {/* Company Info */}
@@ -187,6 +188,19 @@ const Footer = () => {
             <div className="space-y-4">
               {contactInfo.map((info, index) => {
                 const Icon = info.icon
+                let content = info.text
+                let href = null
+                let ariaLabel = null
+                if (info.text.startsWith('+254')) {
+                  href = `tel:${info.text.replace(/\s+/g, '')}`
+                  ariaLabel = `Call us at ${info.text}`
+                } else if (info.text.includes('@')) {
+                  href = `mailto:${info.text}`
+                  ariaLabel = `Email us at ${info.text}`
+                } else if (info.text.toLowerCase().includes('nairobi')) {
+                  href = `https://maps.google.com/?q=${encodeURIComponent(info.text)}`
+                  ariaLabel = `Find us at ${info.text} on Google Maps`
+                }
                 return (
                   <motion.div
                     key={index}
@@ -199,7 +213,19 @@ const Footer = () => {
                     <div className="flex-shrink-0 w-10 h-10 bg-primary-500/20 rounded-lg flex items-center justify-center">
                       <Icon className="w-5 h-5 text-primary-500" />
                     </div>
-                    <span className="text-gray-300">{info.text}</span>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="text-gray-300 hover:text-primary-400 transition-colors duration-300 underline underline-offset-2"
+                        aria-label={ariaLabel}
+                        target={info.text.toLowerCase().includes('nairobi') ? '_blank' : undefined}
+                        rel={info.text.toLowerCase().includes('nairobi') ? 'noopener noreferrer' : undefined}
+                      >
+                        {content}
+                      </a>
+                    ) : (
+                      <span className="text-gray-300">{content}</span>
+                    )}
                   </motion.div>
                 )
               })}
@@ -245,12 +271,12 @@ const Footer = () => {
           </div>
           
           <div className="flex items-center space-x-6">
-            <a href="#" className="text-gray-400 hover:text-primary-500 text-sm transition-colors duration-300">
+            <Link to="/privacy-policy" className="text-gray-400 hover:text-primary-500 text-sm transition-colors duration-300">
               Privacy Policy
-            </a>
-            <a href="#" className="text-gray-400 hover:text-primary-500 text-sm transition-colors duration-300">
+            </Link>
+            <Link to="/terms-of-service" className="text-gray-400 hover:text-primary-500 text-sm transition-colors duration-300">
               Terms of Service
-            </a>
+            </Link>
             <motion.button
               onClick={scrollToTop}
               className="p-2 bg-primary-500 rounded-full hover:bg-primary-600 transition-colors duration-300"

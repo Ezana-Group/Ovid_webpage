@@ -43,137 +43,25 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="py-20 lg:py-32 bg-white dark:bg-gray-900 relative overflow-hidden">
-      {/* Animated Background - Similar to INF AI */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Large Floating Gradient Orbs */}
-        <motion.div
-          className="absolute w-96 h-96 rounded-full opacity-30 blur-3xl"
-          style={{
-            background: 'linear-gradient(135deg, #00B4D8, #0EA5E9, #3B82F6)',
-            top: '10%',
-            left: '10%',
-          }}
-          animate={{
-            x: [0, 50, -30, 0],
-            y: [0, -40, 30, 0],
-            scale: [1, 1.1, 0.9, 1],
-            opacity: [0.2, 0.4, 0.25, 0.2],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+    <section id="about" className="py-16 lg:py-24 bg-white dark:bg-[#10102a] relative overflow-hidden">
+      {/* Colorful Blob Background */}
+      <div className="absolute inset-0">
+        {/* Animated Colorful Blobs */}
+        <div className="absolute top-16 right-10 w-80 h-80 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-32 left-16 w-72 h-72 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-10 w-64 h-64 bg-gradient-to-r from-orange-400 to-red-400 rounded-full blur-3xl opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute bottom-16 right-1/4 w-56 h-56 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur-3xl opacity-20 animate-pulse delay-3000"></div>
+        <div className="absolute top-20 left-1/3 w-48 h-48 bg-gradient-to-r from-pink-400 to-rose-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1500"></div>
         
-        <motion.div
-          className="absolute w-80 h-80 rounded-full opacity-25 blur-3xl"
-          style={{
-            background: 'linear-gradient(135deg, #8B5CF6, #A855F7, #C084FC)',
-            top: '60%',
-            right: '15%',
-          }}
-          animate={{
-            x: [0, -60, 40, 0],
-            y: [0, 50, -20, 0],
-            scale: [0.8, 1.2, 0.9, 0.8],
-            opacity: [0.15, 0.35, 0.2, 0.15],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 5
-          }}
-        />
-        
-        <motion.div
-          className="absolute w-72 h-72 rounded-full opacity-20 blur-2xl"
-          style={{
-            background: 'linear-gradient(135deg, #10B981, #34D399, #6EE7B7)',
-            bottom: '20%',
-            left: '20%',
-          }}
-          animate={{
-            x: [0, 70, -50, 0],
-            y: [0, -30, 40, 0],
-            scale: [1.1, 0.7, 1.3, 1.1],
-            opacity: [0.1, 0.3, 0.15, 0.1],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 10
-          }}
-        />
-        
-        {/* Flowing Lines/Waves */}
-        <motion.div
-          className="absolute top-0 right-0 w-full h-full opacity-10"
-          style={{
-            background: `linear-gradient(45deg, 
-              transparent 30%, 
-              rgba(59, 130, 246, 0.1) 40%, 
-              rgba(139, 92, 246, 0.1) 50%, 
-              rgba(16, 185, 129, 0.1) 60%, 
-              transparent 70%)`
-          }}
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-            rotate: [0, 2, -2, 0],
-          }}
-          transition={{
-            duration: 40,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
-        {/* Smaller Floating Elements */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-16 h-16 rounded-full opacity-20 blur-sm"
-            style={{
-              background: `hsl(${(i * 60) % 360}, 70%, 60%)`,
-              top: `${20 + (i * 15)}%`,
-              left: `${10 + (i * 12)}%`,
-            }}
-            animate={{
-              x: [0, 30, -20, 0],
-              y: [0, -25, 15, 0],
-              scale: [0.5, 1.2, 0.8, 0.5],
-              opacity: [0.1, 0.3, 0.15, 0.1],
-            }}
-            transition={{
-              duration: 15 + i * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 3
-            }}
-          />
-        ))}
-        
-        {/* Mesh Gradient Background */}
-        <div 
-          className="absolute inset-0 opacity-5"
-          style={{
-            background: `
-              radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 90% 20%, rgba(0, 180, 216, 0.3) 0%, transparent 50%)
-            `
-          }}
-        />
+        {/* Glass Overlay */}
+        <div className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-sm"></div>
       </div>
 
-      <div ref={ref} className="container-max section-padding relative z-10">
+      <div ref={ref} className="container-max relative z-10 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <motion.div
+            className="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-gray-200/60 dark:border-white/20 shadow-xl"
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -185,11 +73,11 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               About{' '}
-              <span className="gradient-text">Ovid International</span>
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Ovid International</span>
             </motion.h2>
 
             <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+              className="text-lg text-gray-700 dark:text-blue-100 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -201,7 +89,7 @@ const About = () => {
             </motion.p>
 
             <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+              className="text-lg text-gray-700 dark:text-blue-100 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -226,7 +114,7 @@ const About = () => {
               ].map((value, index) => (
                 <motion.div
                   key={value.name}
-                  className={`group relative px-6 py-3 bg-gradient-to-br ${value.bgGradient} rounded-full shadow-lg transition-all duration-500 border border-white/20 dark:border-gray-700/50 overflow-hidden`}
+                  className={`group relative px-6 py-3 bg-gradient-to-br ${value.bgGradient} rounded-full shadow-lg transition-all duration-500 border border-gray-200/60 dark:border-white/20 overflow-hidden`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
@@ -239,7 +127,7 @@ const About = () => {
                   {/* Background glow */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
                   
-                  <span className={`relative text-base font-semibold bg-gradient-to-r ${value.gradient} bg-clip-text text-transparent`}>
+                  <span className={`relative text-base font-semibold bg-gradient-to-r ${value.gradient} bg-clip-text text-transparent dark:text-white`}>
                     {value.name}
                   </span>
                 </motion.div>
@@ -259,7 +147,7 @@ const About = () => {
               return (
                 <motion.div
                   key={index}
-                  className={`relative text-center p-8 bg-gradient-to-br ${stat.bgGradient} rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/20 dark:border-gray-700/50 overflow-hidden group`}
+                  className="relative text-center p-8 bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/60 dark:border-white/20 overflow-hidden group hover:bg-white/80 dark:hover:bg-white/20"
                   initial={{ opacity: 0, scale: 0.8, y: 30 }}
                   animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.15 }}
@@ -305,7 +193,7 @@ const About = () => {
                   </motion.div>
                   
                   {/* Label with better typography */}
-                  <p className="text-gray-700 dark:text-gray-300 font-semibold text-lg leading-tight">
+                  <p className="text-gray-700 dark:text-blue-100 font-semibold text-lg leading-tight">
                     {stat.label}
                   </p>
 
@@ -319,7 +207,7 @@ const About = () => {
 
         {/* Mission & Vision */}
         <motion.div
-          className="mt-24 grid md:grid-cols-2 gap-8 lg:gap-12"
+          className="mt-16 grid md:grid-cols-2 gap-8 lg:gap-12"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}

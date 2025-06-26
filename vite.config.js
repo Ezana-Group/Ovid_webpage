@@ -12,15 +12,51 @@ export default defineConfig({
     // Enhanced code splitting and optimization
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks for better caching
-          vendor: ['react', 'react-dom'],
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
-          motion: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
-          // Separate analytics and utilities
-          utils: ['web-vitals']
-        },
+        // manualChunks: (id) => {
+        //   // Separate Three.js into its own chunk - only load when needed
+        //   if (id.includes('three') || id.includes('@react-three')) {
+        //     return 'three-vendor'
+        //   }
+        //   // Separate React core
+        //   if (id.includes('react') || id.includes('react-dom')) {
+        //     return 'react-vendor'
+        //   }
+        //   // Separate UI libraries
+        //   if (id.includes('framer-motion')) {
+        //     return 'motion-vendor'
+        //   }
+        //   if (id.includes('lucide-react') || id.includes('react-icons')) {
+        //     return 'icons-vendor'
+        //   }
+        //   // Separate analytics
+        //   if (id.includes('web-vitals') || id.includes('gtag')) {
+        //     return 'analytics-vendor'
+        //   }
+        //   // Separate utilities
+        //   if (id.includes('/utils/')) {
+        //     return 'utils'
+        //   }
+        //   // Separate legal pages (Privacy Policy, Terms of Service)
+        //   if (id.includes('PrivacyPolicy') || id.includes('TermsOfService')) {
+        //     return 'legal-pages'
+        //   }
+        //   // Separate demo components (3D heavy)
+        //   if (id.includes('ThreeBackground') || id.includes('GlassLensDemo2') || id.includes('InteractiveShadows')) {
+        //     return 'demo-components'
+        //   }
+        //   // Critical components (Hero, Navbar, Footer)
+        //   if (id.includes('Hero') || id.includes('Navbar') || id.includes('Footer')) {
+        //     return 'critical-components'
+        //   }
+        //   // Other components
+        //   if (id.includes('/components/')) {
+        //     return 'components'
+        //   }
+        //   // Vendor libraries
+        //   if (id.includes('node_modules')) {
+        //     return 'vendor'
+        //   }
+        // },
         // Optimize chunk file names with content hash
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
@@ -46,14 +82,23 @@ export default defineConfig({
         drop_console: true, // Remove console.log in production
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 2
+        passes: 2,
+        // More aggressive optimization
+        dead_code: true,
+        global_defs: {
+          __DEV__: false
+        }
       },
       mangle: {
-        safari10: true
+        safari10: true,
+        // Mangle property names for smaller bundles
+        properties: {
+          regex: /^_/
+        }
       }
     },
     // Optimize chunk size warnings
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500, // Reduced from 1000
     // Enable source maps for debugging (disabled for production)
     sourcemap: false,
     // CSS code splitting
@@ -69,13 +114,15 @@ export default defineConfig({
       'react',
       'react-dom',
       'framer-motion',
-      'three',
-      '@react-three/fiber',
-      '@react-three/drei',
       'lucide-react',
       'web-vitals'
     ],
-    exclude: ['@react-three/drei']
+    // Exclude heavy libraries from pre-bundling
+    exclude: [
+      'three',
+      '@react-three/fiber',
+      '@react-three/drei'
+    ]
   },
   // Enable modern CSS features
   css: {

@@ -78,15 +78,21 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 lg:py-32 bg-white dark:bg-gray-900 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <section id="contact" className="py-16 lg:py-24 bg-white dark:bg-[#10102a] relative overflow-hidden">
+      {/* Colorful Blob Background */}
+      <div className="absolute inset-0">
+        {/* Animated Colorful Blobs */}
+        <div className="absolute top-20 right-16 w-84 h-84 bg-gradient-to-r from-sky-400 to-blue-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-32 left-20 w-76 h-76 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/3 left-1/4 w-68 h-68 bg-gradient-to-r from-violet-400 to-indigo-400 rounded-full blur-3xl opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute bottom-20 right-1/3 w-64 h-64 bg-gradient-to-r from-orange-400 to-red-400 rounded-full blur-3xl opacity-20 animate-pulse delay-3000"></div>
+        <div className="absolute top-16 left-1/2 w-56 h-56 bg-gradient-to-r from-fuchsia-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1500"></div>
+        
+        {/* Glass Overlay */}
+        <div className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-sm"></div>
       </div>
 
-      <div ref={ref} className="container-max section-padding relative z-10">
+      <div ref={ref} className="container-max relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -94,27 +100,35 @@ const Contact = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+          <motion.div
+            className="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-gray-200/60 dark:border-white/20 shadow-xl max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Get In <span className="gradient-text">Touch</span>
-          </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Ready to transform your business with cutting-edge technology? Let's discuss your project and create something amazing together.
-          </motion.p>
+            <motion.h2
+              className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Get In <span className="bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent">Touch</span>
+            </motion.h2>
+            <motion.p
+              className="text-xl text-gray-700 dark:text-blue-100 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Ready to transform your business with cutting-edge technology? Let's discuss your project and create something amazing together.
+            </motion.p>
+          </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <motion.div
+            className="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-gray-200/60 dark:border-white/20 shadow-xl"
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -129,23 +143,23 @@ const Contact = () => {
                 return (
                   <motion.div
                     key={index}
-                    className="flex items-start space-x-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl"
+                    className="flex items-start space-x-4 p-4 bg-white/80 dark:bg-white/20 backdrop-blur-sm rounded-xl border border-gray-200/60 dark:border-white/20"
                     initial={{ opacity: 0, x: -30 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                     whileHover={{ x: 5, scale: 1.02 }}
                   >
-                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-blue rounded-lg flex items-center justify-center">
+                    <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-blue rounded-lg flex items-center justify-center shadow-lg">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
                         {info.title}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-300 font-medium">
+                      <p className="text-gray-700 dark:text-blue-100 font-medium">
                         {info.details}
                       </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <p className="text-sm text-gray-600 dark:text-blue-200">
                         {info.subDetails}
                       </p>
                     </div>
@@ -163,10 +177,10 @@ const Contact = () => {
             >
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-primary-500 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-gray-300 font-medium">
+                <p className="text-gray-600 dark:text-blue-100 font-medium">
                   Interactive Map Coming Soon
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-gray-500 dark:text-blue-200">
                   Located in Nairobi CBD, Kenya
                 </p>
               </div>
@@ -186,7 +200,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                     Full Name *
                   </label>
                   <input
@@ -195,7 +209,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                     placeholder="Your full name"
                   />
                 </motion.div>
@@ -205,7 +219,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                     Email Address *
                   </label>
                   <input
@@ -214,7 +228,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                     placeholder="your.email@example.com"
                   />
                 </motion.div>
@@ -226,7 +240,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.7 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                     Phone Number
                   </label>
                   <input
@@ -234,7 +248,7 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                     placeholder="+254 700 123 456"
                   />
                 </motion.div>
@@ -244,7 +258,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.8 }}
                 >
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                     Company
                   </label>
                   <input
@@ -252,7 +266,7 @@ const Contact = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                     placeholder="Your company name"
                   />
                 </motion.div>
@@ -263,14 +277,14 @@ const Contact = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.9 }}
               >
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                   Service Interested In
                 </label>
                 <select
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -286,7 +300,7 @@ const Contact = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 1.0 }}
               >
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-blue-100 mb-2">
                   Message *
                 </label>
                 <textarea
@@ -295,7 +309,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800 dark:text-white transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
                   placeholder="Tell us about your project..."
                 />
               </motion.div>
