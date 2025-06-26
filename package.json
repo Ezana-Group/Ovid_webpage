@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
+    "build:fast": "vite build --mode development --sourcemap false",
+    "build:production": "NODE_ENV=production vite build --mode production",
     "build:analyze": "vite build --mode analyze",
     "build:report": "vite build && npx vite-bundle-analyzer dist",
+    "preview": "vite preview",
     "lighthouse": "lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html",
     "lighthouse:mobile": "lighthouse http://localhost:4173 --output html --output-path ./lighthouse-mobile-report.html --preset mobile",
     "audit": "npm run build && npm run preview & sleep 5 && npm run lighthouse && pkill -f vite",
@@ -16,7 +18,11 @@
     "performance:check": "npm run build && npm run preview & sleep 5 && npx web-vitals && pkill -f vite",
     "bundle:analyze": "npm run build && npx vite-bundle-analyzer dist",
     "optimize:images": "node scripts/optimize-images.js",
-    "test:performance": "npm run build && npm run preview & sleep 5 && npx lighthouse http://localhost:4173 --only-categories=performance --output=json --output-path=./performance-report.json && pkill -f vite"
+    "test:performance": "npm run build && npm run preview & sleep 5 && npx lighthouse http://localhost:4173 --only-categories=performance --output=json --output-path=./performance-report.json && pkill -f vite",
+    "preload:critical": "node scripts/preload-critical.js",
+    "speed:test": "npm run build:production && npm run preview & sleep 3 && npm run lighthouse && pkill -f vite",
+    "performance:analyze": "node scripts/optimize-performance.js",
+    "performance:optimize": "npm run build && npm run performance:analyze"
   },
   "keywords": [
     "react",
@@ -31,12 +37,14 @@
   "dependencies": {
     "@react-three/drei": "^10.3.0",
     "@react-three/fiber": "^9.1.2",
+    "@tailwindcss/typography": "^0.5.16",
     "framer-motion": "^12.19.1",
     "lucide-react": "^0.523.0",
     "postcss": "^8.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
+    "react-router-dom": "^6.22.3",
     "tailwindcss": "^3.4.17",
     "three": "^0.177.0",
     "web-vitals": "^4.2.4"

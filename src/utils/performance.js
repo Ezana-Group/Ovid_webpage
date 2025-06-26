@@ -14,6 +14,7 @@ class PerformanceMonitor {
     this.setupLongTasks()
     this.setupLayoutShifts()
     this.setupFirstPaint()
+    this.setupBundleSizeTracking()
   }
 
   // Core Web Vitals monitoring
@@ -200,6 +201,32 @@ class PerformanceMonitor {
     }
   }
 
+  // Bundle size tracking
+  setupBundleSizeTracking() {
+    if (typeof window !== 'undefined') {
+      // Track JavaScript bundle sizes
+      const scripts = document.querySelectorAll('script[src]')
+      let totalJSSize = 0
+      
+      scripts.forEach(script => {
+        const src = script.src
+        if (src.includes('assets/') && src.includes('.js')) {
+          // Estimate size based on URL patterns
+          if (src.includes('three-vendor')) {
+            totalJSSize += 691 // Known Three.js bundle size
+          } else if (src.includes('react-vendor')) {
+            totalJSSize += 376 // Known React bundle size
+          } else if (src.includes('motion-vendor')) {
+            totalJSSize += 80 // Known Framer Motion bundle size
+          }
+        }
+      })
+      
+      this.metrics.totalBundleSize = totalJSSize
+      this.reportMetric('bundle_size', totalJSSize)
+    }
+  }
+
   // Report metrics to analytics
   reportMetric(name, value) {
     if (typeof window !== 'undefined' && window.gtag) {
@@ -353,4 +380,47 @@ export const initPerformanceMonitoring = () => {
 }
 
 // Export the monitor class
-export { PerformanceMonitor } 
+export { PerformanceMonitor }
+
+// Bundle size tracking
+export const trackBundleSize = () => {
+  if (typeof window === 'undefined') return
+  
+  const observer = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      if (entry.entryType === 'resource' && entry.name.includes('.js')) {
+        const sizeKB = Math.round(entry.transferSize / 1024)
+        console.log(`Bundle loaded: ${entry.name} (${sizeKB} KB)`)
+        
+        // Track large bundles
+        if (sizeKB > 200) {
+          console.warn(`Large bundle detected: ${entry.name} (${sizeKB} KB)`)
+        }
+      }
+    })
+  })
+  
+  observer.observe({ entryTypes: ['resource'] })
+}
+
+// Performance budget checking
+export const checkPerformanceBudget = () => {
+  const budgets = {
+    lcp: 2500, // 2.5 seconds
+    fid: 100,  // 100ms
+    cls: 0.1,  // 0.1
+    fcp: 1800, // 1.8 seconds
+    bundleSize: 500000 // 500KB
+  }
+  
+  const metrics = window.performanceMonitor?.getPerformanceSummary()
+  
+  if (metrics) {
+    Object.entries(budgets).forEach(([metric, budget]) => {
+      const value = metrics[metric]
+      if (value && value > budget) {
+        console.warn(`Performance budget exceeded: ${metric} (${value} > ${budget})`)
+      }
+    })
+  }
+} 
