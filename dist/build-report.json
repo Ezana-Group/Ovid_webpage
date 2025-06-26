@@ -1,0 +1,11 @@
+{
+  "buildTime": "2025-06-26T23:46:03.630Z",
+  "totalSize": 1489746,
+  "fileCount": 39,
+  "optimization": {
+    "compression": "enabled",
+    "caching": "configured",
+    "security": "headers_set",
+    "routing": "client_side_handled"
+  }
+}

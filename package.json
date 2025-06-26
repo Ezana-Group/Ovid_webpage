@@ -8,9 +8,11 @@
     "build": "vite build",
     "build:fast": "vite build --mode development --sourcemap false",
     "build:production": "NODE_ENV=production vite build --mode production",
+    "build:cpanel": "npm run build:production && npm run optimize:production",
     "build:analyze": "vite build --mode analyze",
     "build:report": "vite build && npx vite-bundle-analyzer dist",
     "preview": "vite preview",
+    "preview:production": "npm run build:production && vite preview --port 4173",
     "lighthouse": "lighthouse http://localhost:4173 --output html --output-path ./lighthouse-report.html",
     "lighthouse:mobile": "lighthouse http://localhost:4173 --output html --output-path ./lighthouse-mobile-report.html --preset mobile",
     "audit": "npm run build && npm run preview & sleep 5 && npm run lighthouse && pkill -f vite",
@@ -18,11 +20,15 @@
     "performance:check": "npm run build && npm run preview & sleep 5 && npx web-vitals && pkill -f vite",
     "bundle:analyze": "npm run build && npx vite-bundle-analyzer dist",
     "optimize:images": "node scripts/optimize-images.js",
+    "optimize:production": "node scripts/optimize-production.js",
     "test:performance": "npm run build && npm run preview & sleep 5 && npx lighthouse http://localhost:4173 --only-categories=performance --output=json --output-path=./performance-report.json && pkill -f vite",
     "preload:critical": "node scripts/preload-critical.js",
     "speed:test": "npm run build:production && npm run preview & sleep 3 && npm run lighthouse && pkill -f vite",
     "performance:analyze": "node scripts/optimize-performance.js",
-    "performance:optimize": "npm run build && npm run performance:analyze"
+    "performance:optimize": "npm run build && npm run performance:analyze",
+    "deploy:cpanel": "npm run build:cpanel && echo 'Build complete! Upload the contents of the dist/ folder to your cPanel public_html directory.'",
+    "clean": "rm -rf dist node_modules/.vite",
+    "clean:all": "rm -rf dist node_modules package-lock.json && npm install"
   },
   "keywords": [
     "react",

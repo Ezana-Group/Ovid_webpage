@@ -1,4 +1,4 @@
-import{c as e,j as i,m as a,L as t}from"./index-UmZYad9I.js";import{P as r,M as o}from"./phone-DdKaaRok.js";import{M as l}from"./mail-DYD5NGqP.js";
+import{c as e,j as i,m as a,L as t}from"./index-BfFZwAle.js";import{P as r,M as o}from"./phone-DOev2L31.js";import{M as l}from"./mail-B0J50xio.js";
 /**
  * @license lucide-react v0.523.0 - ISC
  *
