@@ -1,4 +1,4 @@
-import{c as a}from"./index-DsX8Z_-a.js";
+import{c as a}from"./index-ZdoUcc_X.js";
 /**
  * @license lucide-react v0.523.0 - ISC
  *

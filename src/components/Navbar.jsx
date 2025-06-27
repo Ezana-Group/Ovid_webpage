@@ -82,6 +82,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
   const renderMenuItem = (item, index, isMobile = false) => {
     const isRouterLink = item.href.startsWith('/')
+    const baseMobileText = isMobile ? 'w-full text-left px-4 py-3 rounded-lg min-h-[48px] transition-colors duration-300' : ''
+    const mobileTextColor = isMobile ? '!text-black dark:!text-white' : ''
+    const mobileTextShadow = isMobile ? 'drop-shadow-sm' : ''
     if (isRouterLink) {
       return (
         <Link
@@ -91,7 +94,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             isScrolled 
               ? 'text-white/95 hover:text-white' 
               : 'text-white/90 hover:text-white'
-          } ${isMobile ? 'w-full text-left px-4 py-3 text-gray-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg min-h-[48px]' : ''}`}
+          } ${baseMobileText} ${mobileTextColor} ${mobileTextShadow}`}
           initial={isMobile ? { opacity: 0, x: -20 } : { opacity: 0, y: -10 }}
           animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
           transition={{ delay: index * (isMobile ? 0.1 : 0.05), duration: 0.3 }}
@@ -99,7 +102,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           aria-label={item.ariaLabel}
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          {item.name}
+          <span className={isMobile ? 'drop-shadow-sm !text-black dark:!text-white' : ''}>{item.name}</span>
           {!isMobile && (
             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
               isScrolled 
@@ -118,14 +121,14 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             isScrolled 
               ? 'text-white/95 hover:text-white' 
               : 'text-white/90 hover:text-white'
-          } ${isMobile ? 'w-full text-left px-4 py-3 text-gray-800 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg min-h-[48px]' : ''}`}
+          } ${baseMobileText} ${mobileTextColor} ${mobileTextShadow}`}
           initial={isMobile ? { opacity: 0, x: -20 } : { opacity: 0, y: -10 }}
           animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, y: 0 }}
           transition={{ delay: index * (isMobile ? 0.1 : 0.05), duration: 0.3 }}
           whileHover={isMobile ? {} : { y: -1 }}
           aria-label={item.ariaLabel}
         >
-          {item.name}
+          <span className={isMobile ? 'drop-shadow-sm !text-black dark:!text-white' : ''}>{item.name}</span>
           {!isMobile && (
             <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${
               isScrolled 
@@ -229,7 +232,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         {isMobileMenuOpen && (
           <motion.div
             id="mobile-menu"
-            className="lg:hidden fixed top-16 left-0 right-0 z-30"
+            className="lg:hidden fixed top-16 left-0 right-0 z-40"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -237,20 +240,8 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             role="menu"
             aria-label="Mobile navigation menu"
           >
-            {/* Mobile Glass Background */}
-            <div className={`absolute inset-0 ${
-              isScrolled 
-                ? 'stained-glass-mobile' 
-                : 'glass-navbar glass-effect glass-refraction bg-white/80 dark:bg-gray-900/25'
-            }`}>
-              {/* Mobile Backdrop Blur */}
-              <div className="absolute inset-0 backdrop-blur-xl"></div>
-              {/* Mobile Glass Edges */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-              <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-              <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-            </div>
+            {/* Solid White Background for Light Mode, Dark for Dark Mode */}
+            <div className="absolute inset-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 shadow-xl"></div>
             <div className="relative z-10 flex flex-col space-y-2 py-6">
               {menuItems.map((item, index) => renderMenuItem(item, index, true))}
             </div>
