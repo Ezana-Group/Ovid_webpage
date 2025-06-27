@@ -309,7 +309,9 @@ const Services = () => {
                     className={`px-8 py-3 bg-gradient-to-r ${selectedService.gradient} text-white font-semibold rounded-full hover:shadow-lg transition-all duration-300`}
                     onClick={() => {
                       setModalOpen(false);
-                      document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                      setTimeout(() => {
+                        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 300);
                     }}
                   >
                     Get Started Today

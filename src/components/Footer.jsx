@@ -56,7 +56,7 @@ const Footer = () => {
   const contactInfo = [
     { icon: Phone, text: '+254 700 123 456' },
     { icon: Mail, text: 'info@ovid.co.ke' },
-    { icon: MapPin, text: 'Nairobi, Kenya' }
+    { icon: MapPin, text: 'Tamarind place, Eldoret', mapUrl: 'https://www.google.com/maps?q=Tamarind+place,+Eldoret' }
   ]
 
   return (
@@ -197,8 +197,8 @@ const Footer = () => {
                 } else if (info.text.includes('@')) {
                   href = `mailto:${info.text}`
                   ariaLabel = `Email us at ${info.text}`
-                } else if (info.text.toLowerCase().includes('nairobi')) {
-                  href = `https://maps.google.com/?q=${encodeURIComponent(info.text)}`
+                } else if (info.text.toLowerCase().includes('tamarind')) {
+                  href = info.mapUrl
                   ariaLabel = `Find us at ${info.text} on Google Maps`
                 }
                 return (

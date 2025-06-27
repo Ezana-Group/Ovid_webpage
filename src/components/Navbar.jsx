@@ -241,29 +241,18 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <div className={`absolute inset-0 ${
               isScrolled 
                 ? 'stained-glass-mobile' 
-                : 'glass-navbar glass-effect glass-refraction bg-white/15 dark:bg-gray-900/25'
+                : 'glass-navbar glass-effect glass-refraction bg-white/80 dark:bg-gray-900/25'
             }`}>
               {/* Mobile Backdrop Blur */}
               <div className="absolute inset-0 backdrop-blur-xl"></div>
-              
               {/* Mobile Glass Edges */}
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
               <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
               <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-              
-              {/* Mobile Inner Reflection */}
-              <div className="absolute inset-2 bg-gradient-to-br from-white/8 via-transparent to-white/4"></div>
-              
-              {/* Mobile Shadow */}
-              <div className="absolute inset-0 shadow-xl shadow-black/20"></div>
             </div>
-            
-            {/* Mobile Menu Content */}
-            <div className="relative z-10 container-max section-padding py-4">
-              <div className="space-y-2">
-                {menuItems.map((item, index) => renderMenuItem(item, index, true))}
-              </div>
+            <div className="relative z-10 flex flex-col space-y-2 py-6">
+              {menuItems.map((item, index) => renderMenuItem(item, index, true))}
             </div>
           </motion.div>
         )}

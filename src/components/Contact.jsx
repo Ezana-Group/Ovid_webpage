@@ -33,8 +33,9 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "Nairobi, Kenya",
-      subDetails: "CBD, Kencom House"
+      details: "Tamarind place, Eldoret",
+      subDetails: "Uasin Gishu County, Kenya",
+      mapUrl: "https://www.google.com/maps?q=Tamarind+place,+Eldoret"
     }
   ]
 
@@ -156,9 +157,20 @@ const Contact = () => {
                       <h4 className="font-semibold text-gray-900 dark:text-white mb-1">
                         {info.title}
                       </h4>
-                      <p className="text-gray-700 dark:text-blue-100 font-medium">
-                        {info.details}
-                      </p>
+                      {info.title === 'Visit Us' ? (
+                        <a
+                          href={info.mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary-600 dark:text-primary-400 underline hover:text-primary-800 dark:hover:text-primary-200 transition-colors duration-200 font-medium"
+                        >
+                          {info.details}
+                        </a>
+                      ) : (
+                        <p className="text-gray-700 dark:text-blue-100 font-medium">
+                          {info.details}
+                        </p>
+                      )}
                       <p className="text-sm text-gray-600 dark:text-blue-200">
                         {info.subDetails}
                       </p>
@@ -170,20 +182,22 @@ const Contact = () => {
 
             {/* Map Placeholder */}
             <motion.div
-              className="h-64 bg-gradient-to-br from-primary-100 to-accent-blue/20 dark:from-primary-900/30 dark:to-accent-blue/20 rounded-2xl flex items-center justify-center"
+              className="h-64 bg-gradient-to-br from-primary-100 to-accent-blue/20 dark:from-primary-900/30 dark:to-accent-blue/20 rounded-2xl flex items-center justify-center overflow-hidden"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-primary-500 mx-auto mb-4" />
-                <p className="text-gray-600 dark:text-blue-100 font-medium">
-                  Interactive Map Coming Soon
-                </p>
-                <p className="text-sm text-gray-500 dark:text-blue-200">
-                  Located in Nairobi CBD, Kenya
-                </p>
-              </div>
+              <iframe
+                title="Tamarind place, Eldoret Map"
+                src="https://www.google.com/maps?q=Tamarind+place,+Eldoret&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-2xl w-full h-full"
+              ></iframe>
             </motion.div>
           </motion.div>
 
