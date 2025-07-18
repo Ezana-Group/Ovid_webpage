@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Code, Layers, Smartphone, Settings, HardDrive, Network, Workflow, Download, Clock, DollarSign } from 'lucide-react'
+import { Code, Layers, Smartphone, Settings, HardDrive, Network, Workflow, Download, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Services = () => {
@@ -242,10 +242,6 @@ const Services = () => {
                     <span className="flex items-center">
                       <Clock className="w-3 h-3 mr-1" />
                       {service.additionalInfo.duration}
-                    </span>
-                    <span className="flex items-center">
-                      <DollarSign className="w-3 h-3 mr-1" />
-                      {service.additionalInfo.pricing}
                     </span>
                   </div>
 
