@@ -240,7 +240,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                     placeholder="Your full name"
                   />
                 </motion.div>
@@ -259,7 +259,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                     placeholder="your.email@example.com"
                   />
                 </motion.div>
@@ -279,7 +279,7 @@ const Contact = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                     placeholder="+254 727 410 320"
                   />
                 </motion.div>
@@ -297,7 +297,7 @@ const Contact = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                     placeholder="Your company name"
                   />
                 </motion.div>
@@ -315,7 +315,7 @@ const Contact = () => {
                   name="service"
                   value={formData.service}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                 >
                   <option value="">Select a service</option>
                   {services.map((service, index) => (
@@ -340,7 +340,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-[#18183a] dark:text-white transition-all duration-300"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-[#18183a] text-gray-900 dark:text-white transition-all duration-300"
                   placeholder="Tell us about your project..."
                 />
               </motion.div>

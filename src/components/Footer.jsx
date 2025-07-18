@@ -243,7 +243,7 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Your email"
-                  className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:border-primary-500 text-white"
+                  className="flex-1 px-3 py-2 bg-gray-800 dark:bg-gray-800 border border-gray-700 dark:border-gray-700 rounded-l-lg focus:outline-none focus:border-primary-500 text-gray-900 dark:text-white"
                 />
                 <motion.button
                   className="px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-blue rounded-r-lg hover:shadow-lg transition-all duration-300"
