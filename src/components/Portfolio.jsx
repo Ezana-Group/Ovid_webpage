@@ -84,131 +84,50 @@ const Portfolio = () => {
     : projects.filter(project => project.category === selectedCategory)
 
   return (
-    <section id="portfolio" className="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800 relative overflow-hidden">
-      {/* Subtle Colorful Shadows */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Large Floating Gradient Orbs */}
-        <motion.div
-          className="absolute w-[480px] h-[480px] rounded-full opacity-15 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(168, 85, 247, 0.14) 50%, transparent 100%)',
-            top: '10%',
-            right: '10%',
-          }}
-          animate={{
-            x: [0, -55, 40, 0],
-            y: [0, 60, -45, 0],
-            scale: [0.85, 1.15, 0.9, 0.85],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+    <section id="portfolio" className="py-16 lg:py-24 bg-white dark:bg-[#10102a] relative overflow-hidden">
+      {/* Colorful Blob Background */}
+      <div className="absolute inset-0">
+        {/* Animated Colorful Blobs */}
+        <div className="absolute top-24 right-24 w-88 h-88 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-28 left-20 w-76 h-76 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute top-40 left-1/4 w-64 h-64 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full blur-3xl opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute bottom-16 right-1/3 w-72 h-72 bg-gradient-to-r from-red-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse delay-3000"></div>
+        <div className="absolute top-16 left-1/2 w-60 h-60 bg-gradient-to-r from-lime-400 to-green-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1500"></div>
         
-        <motion.div
-          className="absolute w-[420px] h-[420px] rounded-full opacity-18 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, rgba(251, 191, 36, 0.12) 50%, transparent 100%)',
-            bottom: '12%',
-            left: '8%',
-          }}
-          animate={{
-            x: [0, 70, -50, 0],
-            y: [0, -55, 40, 0],
-            scale: [1.0, 0.75, 1.2, 1.0],
-          }}
-          transition={{
-            duration: 26,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 6
-          }}
-        />
-        
-        <motion.div
-          className="absolute w-[360px] h-[360px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(14, 165, 233, 0.12) 50%, transparent 100%)',
-            top: '50%',
-            left: '50%',
-          }}
-          animate={{
-            x: [0, -35, 25, 0],
-            y: [0, 40, -30, 0],
-            scale: [0.9, 1.05, 0.8, 0.9],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 3
-          }}
-        />
-        
-        {/* Smaller Floating Elements */}
-        {[...Array(7)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-28 h-28 rounded-full opacity-14 blur-2xl"
-            style={{
-              background: `hsl(${(i * 50) % 360}, 70%, 65%)`,
-              top: `${18 + (i * 9)}%`,
-              right: `${12 + (i * 8)}%`,
-            }}
-            animate={{
-              x: [0, Math.sin(i * 0.5) * 18, Math.cos(i * 0.5) * 14, 0],
-              y: [0, Math.cos(i * 0.5) * 22, Math.sin(i * 0.5) * 18, 0],
-              scale: [0.8, 1.1, 0.9, 0.8],
-              opacity: [0.1, 0.18, 0.14, 0.1],
-            }}
-            transition={{
-              duration: 16 + i * 1.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 2.2
-            }}
-          />
-        ))}
-        
-        {/* Layered Mesh Gradient Background */}
-        <div 
-          className="absolute inset-0 opacity-7"
-          style={{
-            background: `
-              radial-gradient(circle at 18% 22%, rgba(139, 92, 246, 0.09) 0%, transparent 48%),
-              radial-gradient(circle at 82% 78%, rgba(245, 158, 11, 0.09) 0%, transparent 48%),
-              radial-gradient(circle at 35% 85%, rgba(6, 182, 212, 0.09) 0%, transparent 48%),
-              radial-gradient(circle at 85% 15%, rgba(239, 68, 68, 0.09) 0%, transparent 48%)
-            `
-          }}
-        />
+        {/* Glass Overlay */}
+        <div className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-sm"></div>
       </div>
 
-      <div ref={ref} className="container-max section-padding relative z-10">
+      <div ref={ref} className="container-max relative z-10">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+          <motion.div
+            className="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-gray-200/60 dark:border-white/20 shadow-xl max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Our <span className="gradient-text">Portfolio</span>
-          </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Explore our diverse range of successful projects across various industries and technologies.
-          </motion.p>
+            <motion.h2
+              className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Our <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Portfolio</span>
+            </motion.h2>
+            <motion.p
+              className="text-xl text-gray-700 dark:text-blue-100 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Explore our diverse range of successful projects across various industries and technologies.
+            </motion.p>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -224,7 +143,7 @@ const Portfolio = () => {
               className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                 selectedCategory === category.id
                   ? 'bg-gradient-to-r from-primary-500 to-accent-blue text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                  : 'bg-white/60 dark:bg-white/10 text-gray-700 dark:text-blue-100 hover:bg-white/80 dark:hover:bg-white/20 border border-gray-200/60 dark:border-white/20'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -241,11 +160,11 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="group relative bg-white dark:bg-gray-900 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden"
+              className="group relative bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-200/60 dark:border-white/20 hover:bg-white/80 dark:hover:bg-white/20"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              whileHover={{ y: -10, scale: 1.03 }}
               layout
             >
               <div className="relative h-48 overflow-hidden">
@@ -259,14 +178,14 @@ const Portfolio = () => {
                 
                 <div className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <motion.button
-                    className="p-3 bg-white/90 rounded-full text-gray-900 hover:bg-white transition-colors duration-300"
+                    className="p-3 bg-white/90 dark:bg-white/20 rounded-full text-gray-900 dark:text-white hover:bg-white dark:hover:bg-white/30 transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
                     <Eye className="w-5 h-5" />
                   </motion.button>
                   <motion.button
-                    className="p-3 bg-white/90 rounded-full text-gray-900 hover:bg-white transition-colors duration-300"
+                    className="p-3 bg-white/90 dark:bg-white/20 rounded-full text-gray-900 dark:text-white hover:bg-white dark:hover:bg-white/30 transition-colors duration-300"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -279,7 +198,7 @@ const Portfolio = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                <p className="text-gray-700 dark:text-blue-100 mb-4 leading-relaxed">
                   {project.description}
                 </p>
                 
@@ -287,7 +206,7 @@ const Portfolio = () => {
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium"
+                      className="px-3 py-1 bg-primary-50 dark:bg-white/10 text-primary-700 dark:text-blue-100 rounded-full text-sm font-medium border border-gray-200/60 dark:border-white/20"
                     >
                       {tech}
                     </span>

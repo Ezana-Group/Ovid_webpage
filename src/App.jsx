@@ -8,6 +8,7 @@ import InteractiveShadows from './components/InteractiveShadows'
 import { initAnalytics, trackSectionView } from './utils/analytics'
 import { initImageOptimizations, preloadCriticalImagesList } from './utils/imageOptimization'
 import { initPerformanceMonitoring } from './utils/performance'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Lazy load non-critical components for better performance
 const About = lazy(() => import('./components/About'))
@@ -16,6 +17,16 @@ const WhyChooseUs = lazy(() => import('./components/WhyChooseUs'))
 const Portfolio = lazy(() => import('./components/Portfolio'))
 const Contact = lazy(() => import('./components/Contact'))
 const Footer = lazy(() => import('./components/Footer'))
+
+// Lazy load service pages
+const SoftwareDevelopment = lazy(() => import('./components/services/SoftwareDevelopment'))
+const ThreeDDesignPrinting = lazy(() => import('./components/services/3DDesignPrinting'))
+const WebMobileDevelopment = lazy(() => import('./components/services/WebMobileDevelopment'))
+const ITHardwareMaintenance = lazy(() => import('./components/services/ITHardwareMaintenance'))
+const DataRecovery = lazy(() => import('./components/services/DataRecovery'))
+const ComputerNetworking = lazy(() => import('./components/services/ComputerNetworking'))
+const LowCodeAutomation = lazy(() => import('./components/services/LowCodeAutomation'))
+const SoftwareInstallation = lazy(() => import('./components/services/SoftwareInstallation'))
 
 // Loading component for lazy-loaded sections
 const SectionLoader = () => (
@@ -79,79 +90,219 @@ function App() {
   }
 
   return (
-    <div className={`App ${darkMode ? 'dark' : ''}`}>
-      {/* Skip to main content link for accessibility */}
-      <a
-        href="#main-content"
-        onClick={skipToMain}
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-50 focus:z-50"
-        aria-label="Skip to main content"
-      >
-        Skip to main content
-      </a>
-      
-      <InteractiveShadows />
-      <CustomCursor />
-      
-      {/* Navigation */}
-      <header role="banner">
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
-      </header>
-      
-      {/* Main Content */}
-      <motion.main
-        id="main-content"
-        role="main"
-        tabIndex="-1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="focus:outline-none"
-      >
-        {/* Hero Section - Critical, not lazy loaded */}
-        <section id="hero" aria-label="Hero section" className="lazy-section">
-          <Hero />
-        </section>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>            
+            {/* Shared Flowing Background Blob */}
+            <div className="pointer-events-none select-none fixed top-0 left-1/2 -translate-x-1/2 z-0 w-[120vw] h-[90vh] md:w-[100vw] md:h-[120vh] bg-gradient-to-br from-pink-300 via-purple-200 to-blue-200 dark:from-pink-900 dark:via-purple-900 dark:to-blue-900 rounded-full blur-[120px] opacity-15 md:opacity-20" style={{ filter: 'blur(120px)' }} aria-hidden="true"></div>
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            {/* Hero Content */}
+            <main className="pt-16">
+              <Hero />
+              
+              <Suspense fallback={<SectionLoader />}>
+                <About />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Services />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <WhyChooseUs />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Portfolio />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Contact />
+              </Suspense>
+            </main>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <Footer />
+            </Suspense>
+          </div>
+        } />
         
-        {/* Lazy loaded sections with loading fallbacks */}
-        <Suspense fallback={<SectionLoader />}>
-          <section id="about" aria-label="About us section" className="lazy-section">
-            <About />
-          </section>
-        </Suspense>
+        <Route path="/website" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            {/* Main Content */}
+            <main id="main-content" className="pt-16">
+              <Hero />
+              
+              <Suspense fallback={<SectionLoader />}>
+                <About />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Services />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <WhyChooseUs />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Portfolio />
+              </Suspense>
+              
+              <Suspense fallback={<SectionLoader />}>
+                <Contact />
+              </Suspense>
+            </main>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <Footer />
+            </Suspense>
+          </div>
+        } />
         
-        <Suspense fallback={<SectionLoader />}>
-          <section id="services" aria-label="Our services section" className="lazy-section">
-            <Services />
-          </section>
-        </Suspense>
+        {/* Service Pages */}
+        <Route path="/services/software-development" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <SoftwareDevelopment />
+            </Suspense>
+          </div>
+        } />
         
-        <Suspense fallback={<SectionLoader />}>
-          <section id="why-choose-us" aria-label="Why choose us section" className="lazy-section">
-            <WhyChooseUs />
-          </section>
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <section id="portfolio" aria-label="Our portfolio section" className="lazy-section">
-            <Portfolio />
-          </section>
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <section id="contact" aria-label="Contact us section" className="lazy-section">
-            <Contact />
-          </section>
-        </Suspense>
-      </motion.main>
-      
-      {/* Footer */}
-      <Suspense fallback={<SectionLoader />}>
-        <footer role="contentinfo" className="lazy-section">
-          <Footer />
-        </footer>
-      </Suspense>
-    </div>
+        <Route path="/services/3d-design-printing" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <ThreeDDesignPrinting />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/web-mobile-development" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <WebMobileDevelopment />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/it-hardware-maintenance" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <ITHardwareMaintenance />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/data-recovery" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <DataRecovery />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/computer-networking" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <ComputerNetworking />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/low-code-automation" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <LowCodeAutomation />
+            </Suspense>
+          </div>
+        } />
+
+        <Route path="/services/software-installation" element={
+          <div className={`App ${darkMode ? 'dark' : ''}`}>
+            <InteractiveShadows />
+            <CustomCursor />
+            
+            {/* Navigation */}
+            <header role="banner">
+              <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+            </header>
+            
+            <Suspense fallback={<SectionLoader />}>
+              <SoftwareInstallation />
+            </Suspense>
+          </div>
+        } />
+      </Routes>
+    </Router>
   )
 }
 

@@ -151,9 +151,9 @@ Customize the 3D background in `ThreeBackground.jsx`:
 
 ## 📧 Contact Information
 
-- **Website**: [www.ovidinternational.co.ke](https://www.ovidinternational.co.ke)
-- **Email**: info@ovidinternational.co.ke
-- **Phone**: +254 700 123 456
+- **Website**: [www.ovid.co.ke](https://www.ovid.co.ke)
+- **Email**: info@ovid.co.ke
+- **Phone**: +254 727 410 320
 - **Location**: Nairobi, Kenya
 
 ## 📄 License

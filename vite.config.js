@@ -12,14 +12,39 @@ export default defineConfig({
     // Enhanced code splitting and optimization
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Vendor chunks for better caching
-          vendor: ['react', 'react-dom'],
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
-          motion: ['framer-motion'],
-          icons: ['lucide-react', 'react-icons'],
-          // Separate analytics and utilities
-          utils: ['web-vitals']
+        manualChunks: (id) => {
+          // More granular chunk splitting
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor'
+            }
+            if (id.includes('three') || id.includes('@react-three')) {
+              return 'three-vendor'
+            }
+            if (id.includes('framer-motion')) {
+              return 'motion-vendor'
+            }
+            if (id.includes('lucide-react') || id.includes('react-icons')) {
+              return 'icons-vendor'
+            }
+            if (id.includes('web-vitals')) {
+              return 'analytics-vendor'
+            }
+            return 'vendor'
+          }
+          
+          // Component-based splitting
+          if (id.includes('/components/')) {
+            if (id.includes('Hero') || id.includes('Navbar') || id.includes('Footer')) {
+              return 'critical-components'
+            }
+            return 'components'
+          }
+          
+          // Utility splitting
+          if (id.includes('/utils/')) {
+            return 'utils'
+          }
         },
         // Optimize chunk file names with content hash
         chunkFileNames: 'assets/[name]-[hash].js',

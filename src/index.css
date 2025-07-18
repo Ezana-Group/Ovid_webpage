@@ -1,26 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20.,-');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.container-max {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container-max {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-max {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-max {
+    padding: 0 4rem;
+  }
+}
+
+.section-padding {
+  padding: 4rem 0;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 6rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 8rem 0;
+  }
+}
+
+/* Grid Animation */
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced cursor styles */
+.cursor-none {
+  cursor: none;
+}
+
+/* Backdrop blur support */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00b4d8, #1be7ff);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #1be7ff, #00b4d8);
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Prevent text selection on interactive elements */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Optimized transitions - only apply where needed */
+.transition-fast {
+  transition: all 0.15s ease;
+}
+
+.transition-normal {
+  transition: all 0.3s ease;
+}
+
+.transition-slow {
+  transition: all 0.5s ease;
+}
+
+/* Remove global transitions for better performance */
+button, a, input, select, textarea {
+  transition: all 0.2s ease;
+}
+
+/* Remove transition for transform to prevent conflicts with Framer Motion */
+*[style*="transform"] {
+  transition: none !important;
+}
+
+/* Critical rendering optimizations */
+.critical-above-fold {
+  contain: layout style paint;
+  content-visibility: visible;
+}
+
+.lazy-below-fold {
+  contain: layout style paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
+/* Ensure proper z-index stacking */
+.z-negative {
+  z-index: -1;
+}
+
+/* Section spacing to account for fixed navbar */
+.section-top-spacing {
+  padding-top: calc(56px + 2rem); /* navbar height + spacing */
+}
+
+@media (min-width: 1024px) {
+  .section-top-spacing {
+    padding-top: calc(56px + 3rem);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .text-responsive {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+}
+
+/* Prevent horizontal overflow */
+.prevent-overflow {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Enhanced focus styles for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #00b4d8;
+  outline-offset: 2px;
+}
+
+/* Improved button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply border-2 border-cyan-500 text-cyan-400 font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-cyan-500 hover:text-white;
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient text utilities */
+.gradient-text {
+  background: linear-gradient(45deg, #00b4d8, #1be7ff, #b0ff92);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.6); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Performance improvements */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Ensure proper image loading */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
     font-display: swap; /* Optimize font loading */
+    overflow-x: hidden; /* Prevent horizontal scroll */
   }
   
   body {
     @apply font-sans antialiased;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevent horizontal scroll */
     /* Improve text rendering */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* Performance optimizations */
     contain: layout style;
+    width: 100%;
+    max-width: 100vw;
   }
   
   * {
     box-sizing: border-box;
+  }
+  
+  /* Prevent all elements from causing horizontal overflow */
+  *, *::before, *::after {
+    max-width: 100%;
+  }
+  
+  /* Container constraint */
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
   
   /* Accessibility improvements */
@@ -356,10 +671,16 @@
   
   .section-padding {
     @apply px-4 sm:px-6 lg:px-8;
+    width: 100%;
+    max-width: 100vw;
   }
   
   .container-max {
     @apply max-w-7xl mx-auto;
+    width: 100%;
+    max-width: min(100vw, 80rem);
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
   }
   
   .text-shadow-sm {

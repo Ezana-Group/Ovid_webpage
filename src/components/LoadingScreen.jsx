@@ -158,7 +158,7 @@ const LoadingScreen = () => {
           </motion.span>
         </motion.h1>
 
-        <motion.p
+        <motion.div
           className="text-xl text-cyan-100 mb-12 flex items-center justify-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -171,7 +171,7 @@ const LoadingScreen = () => {
           >
             <Zap className="w-5 h-5 text-cyan-400" />
           </motion.div>
-        </motion.p>
+        </motion.div>
 
         {/* Enhanced Progress Bar */}
         <div className="w-80 mx-auto">
