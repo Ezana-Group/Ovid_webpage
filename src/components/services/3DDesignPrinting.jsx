@@ -6,7 +6,6 @@ import {
   ArrowLeft, 
   CheckCircle, 
   Clock, 
-  DollarSign, 
   Users, 
   Zap, 
   Shield, 
@@ -320,13 +319,6 @@ const ThreeDDesignPrinting = () => {
                     <div>
                       <div className="text-sm text-gray-500 dark:text-blue-200">Duration</div>
                       <div className="font-bold text-gray-900 dark:text-white text-lg">{service.additionalInfo.duration}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4 p-4 bg-white/60 dark:bg-white/10 rounded-xl">
-                    <DollarSign className="w-6 h-6 text-green-500" />
-                    <div>
-                      <div className="text-sm text-gray-500 dark:text-blue-200">Starting Price</div>
-                      <div className="font-bold text-gray-900 dark:text-white text-lg">{service.additionalInfo.pricing}</div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4 p-4 bg-white/60 dark:bg-white/10 rounded-xl">
