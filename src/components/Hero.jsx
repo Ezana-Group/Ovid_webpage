@@ -1,378 +1,179 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Canvas } from '@react-three/fiber'
-import { Float, Text3D, OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei'
-import { Suspense, useState, useEffect, useRef } from 'react'
-import { ChevronDown, Rocket, Users, Zap, Globe, ChevronRight, Sparkles } from 'lucide-react'
-import ThreeBackground from './ThreeBackground'
+import React, { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import {
+  Box,
+  Cloud,
+  Settings2,
+  Workflow,
+  Share2,
+  DownloadCloud
+} from 'lucide-react'
+
+const STAINED_TAGS = [
+  { label: 'Networking', icon: Share2, bg: 'from-cyan-200/70 to-blue-200/40 dark:from-cyan-400/60 dark:to-blue-500/40', border: 'border-cyan-200/60 dark:border-cyan-300/40', text: 'text-gray-800 dark:text-white' },
+  { label: 'Data Recovery', icon: DownloadCloud, bg: 'from-purple-200/70 to-pink-200/40 dark:from-purple-400/60 dark:to-pink-400/40', border: 'border-purple-200/60 dark:border-purple-300/40', text: 'text-gray-800 dark:text-white' },
+  { label: '3D Design', icon: Box, bg: 'from-green-200/70 to-emerald-200/40 dark:from-green-400/60 dark:to-emerald-400/40', border: 'border-green-200/60 dark:border-green-300/40', text: 'text-gray-800 dark:text-white' },
+  { label: 'Cloud Systems', icon: Cloud, bg: 'from-cyan-100/70 to-blue-100/40 dark:from-cyan-300/60 dark:to-blue-300/40', border: 'border-cyan-100/60 dark:border-cyan-200/40', text: 'text-gray-800 dark:text-white' },
+  { label: 'Automation', icon: Settings2, bg: 'from-pink-200/70 to-rose-200/40 dark:from-pink-400/60 dark:to-rose-400/40', border: 'border-pink-200/60 dark:border-pink-300/40', text: 'text-gray-800 dark:text-white' },
+  { label: 'Low-Code Apps', icon: Workflow, bg: 'from-blue-200/70 to-indigo-200/40 dark:from-blue-400/60 dark:to-indigo-400/40', border: 'border-blue-200/60 dark:border-blue-300/40', text: 'text-gray-800 dark:text-white' },
+]
+
+// Optimized animation variants with reduced complexity
+const tagVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({ 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      delay: 0.1 + i * 0.05, 
+      duration: 0.4, 
+      ease: 'easeOut' 
+    } 
+  })
+}
 
 const Hero = () => {
-  const [isHovering, setIsHovering] = useState(false)
-  const [typewriterText, setTypewriterText] = useState('')
-  const heroRef = useRef(null)
+  // Typewriter effect for tagline - optimized
+  const tagline = 'Empowering Africa Through Technology ⚡'
+  const [typed, setTyped] = useState('')
   
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  })
-  
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
-
-  const typewriterTexts = [
-    "Empowering Africa Through Technology ⚡",
-    "Building Tomorrow's Digital Solutions",
-    "Innovating with Purpose and Precision"
-  ]
-  
-  const [currentTextIndex, setCurrentTextIndex] = useState(0)
-
-  // Typewriter effect
   useEffect(() => {
-    let timeout
-    const currentText = typewriterTexts[currentTextIndex]
-    
-    if (typewriterText.length < currentText.length) {
-      timeout = setTimeout(() => {
-        setTypewriterText(currentText.slice(0, typewriterText.length + 1))
-      }, 100)
-    } else {
-      timeout = setTimeout(() => {
-        setTypewriterText('')
-        setCurrentTextIndex((prev) => (prev + 1) % typewriterTexts.length)
-      }, 3000)
-    }
-    
-    return () => clearTimeout(timeout)
-  }, [typewriterText, currentTextIndex])
+    let i = 0
+    const interval = setInterval(() => {
+      setTyped(tagline.slice(0, i + 1))
+      i++
+      if (i === tagline.length) clearInterval(interval)
+    }, 50) // Slightly faster for better UX
+    return () => clearInterval(interval)
+  }, [])
 
-  const scrollToNext = () => {
-    const element = document.querySelector('#about')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+  // For matching OVID/INTERNATIONAL width - optimized
+  const ovidRef = useRef(null)
+  const intlRef = useRef(null)
+  const [maxWidth, setMaxWidth] = useState(undefined)
+  
+  useEffect(() => {
+    if (ovidRef.current && intlRef.current) {
+      const ovidWidth = ovidRef.current.offsetWidth
+      const intlWidth = intlRef.current.offsetWidth
+      setMaxWidth(Math.max(ovidWidth, intlWidth))
     }
-  }
-
-  const scrollToTechnology = () => {
-    const element = document.querySelector('#services')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
+  }, [])
 
   return (
-    <section 
-      ref={heroRef}
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'radial-gradient(ellipse at center, #0A0F2C 0%, #101730 100%)'
-      }}
-    >
-      {/* Enhanced 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <Suspense fallback={null}>
-            <ThreeBackground />
-            {/* Floating 3D Elements */}
-            <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-              <Sphere args={[0.5, 64, 64]} position={[-4, 2, -2]}>
-                <MeshDistortMaterial
-                  color="#1BE7FF"
-                  transparent
-                  opacity={0.3}
-                  distort={0.3}
-                  speed={2}
-                />
-              </Sphere>
-            </Float>
-            <Float speed={2} rotationIntensity={1.5} floatIntensity={1}>
-              <Sphere args={[0.3, 32, 32]} position={[4, -1, -1]}>
-                <MeshDistortMaterial
-                  color="#FF4BC1"
-                  transparent
-                  opacity={0.4}
-                  distort={0.5}
-                  speed={3}
-                />
-              </Sphere>
-            </Float>
-          </Suspense>
-        </Canvas>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#10102a]">
+      {/* Optimized Background - Reduced complexity */}
+      <div className="absolute inset-0">
+        {/* Simplified background blobs with reduced animation */}
+        <div className="absolute top-16 right-10 w-80 h-80 bg-gradient-to-r from-pink-300 to-orange-200 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute bottom-32 left-16 w-72 h-72 bg-gradient-to-r from-purple-300 to-indigo-200 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute top-1/3 left-10 w-64 h-64 bg-gradient-to-r from-orange-200 to-red-200 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute bottom-16 right-1/4 w-56 h-56 bg-gradient-to-r from-green-200 to-emerald-200 rounded-full blur-3xl opacity-20"></div>
+        <div className="absolute top-20 left-1/3 w-48 h-48 bg-gradient-to-r from-pink-200 to-rose-200 rounded-full blur-3xl opacity-20"></div>
+        {/* Glass Overlay for Softness */}
+        <div className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-sm"></div>
       </div>
-
-      {/* Enhanced Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0F2C]/90 via-[#101730]/80 to-[#1a1f3a]/75 z-10"></div>
       
-      {/* Radial Glow Effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00B4D8]/20 rounded-full blur-3xl z-15"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#1BE7FF]/15 rounded-full blur-3xl z-15"></div>
-      
-      {/* Tech Grid Overlay */}
-      <div className="absolute inset-0 z-15 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300B4D8' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3Ccircle cx='0' cy='30' r='1'/%3E%3Ccircle cx='60' cy='30' r='1'/%3E%3Ccircle cx='30' cy='0' r='1'/%3E%3Ccircle cx='30' cy='60' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
-
-      {/* Content with Parallax */}
-      <motion.div 
-        className="relative z-20 text-center section-padding container-max"
-        style={{ y, opacity }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="space-y-8"
-        >
-          {/* Premium Logo with Advanced Effects */}
-          <motion.div
-            className="flex justify-center mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <motion.div
-              className="relative w-32 h-32 bg-gradient-to-br from-[#00B4D8] via-[#1BE7FF] to-[#B0FF92] rounded-3xl flex items-center justify-center shadow-2xl"
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: 5,
-                boxShadow: "0 25px 50px rgba(0, 180, 216, 0.4), 0 0 40px rgba(27, 231, 255, 0.3)"
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            >
-              {/* Glow Ring */}
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-[#1BE7FF] to-[#00B4D8] rounded-3xl opacity-30 blur-lg"
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-              
-              {/* Tech Circuit Pattern */}
-              <div className="absolute inset-2 border border-white/30 rounded-2xl"></div>
-              <div className="absolute inset-4 border border-white/20 rounded-xl"></div>
-              
-              {/* Logo Content */}
-              <motion.div
-                className="relative z-10"
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <Globe className="w-14 h-14 text-white drop-shadow-lg" />
-              </motion.div>
-              
-              {/* Floating Sparkles */}
-              {[...Array(4)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-[#1BE7FF] rounded-full"
-                  style={{
-                    top: `${20 + i * 20}%`,
-                    left: `${20 + i * 20}%`,
-                  }}
-                  animate={{
-                    scale: [0, 1, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: i * 0.5,
-                  }}
-                />
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Enhanced Main Heading with Shimmer */}
-          <motion.h1
-            className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-          >
-            <motion.span 
-              className="block relative"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400 }}
+      {/* Content Row */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4 md:px-8">
+        {/* LEFT SIDE: Branding & Visual Identity */}
+        <div className="flex-1 flex flex-col items-start justify-center py-12 w-full space-y-4 md:space-y-6">
+          {/* Main Heading: OVID (top), INTERNATIONAL (bottom), same width */}
+          <div className="flex flex-col items-start md:items-start" style={maxWidth ? { width: maxWidth } : {}}>
+            <span
+              ref={ovidRef}
+              className="block text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 bg-clip-text text-transparent text-left leading-tight"
+              style={maxWidth ? { width: maxWidth } : {}}
             >
               OVID
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-            </motion.span>
-            <motion.span 
-              className="block relative bg-gradient-to-r from-[#1BE7FF] via-[#00B4D8] to-[#B0FF92] bg-clip-text text-transparent text-7xl md:text-8xl lg:text-9xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 400 }}
-              style={{
-                backgroundSize: '200% auto',
-                animation: 'gradient-shimmer 3s ease-in-out infinite'
-              }}
+            </span>
+            <span
+              ref={intlRef}
+              className="block text-3xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-wide text-left leading-tight"
+              style={maxWidth ? { width: maxWidth } : {}}
             >
               INTERNATIONAL
-              {/* Tech Accent */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-6 h-6 bg-[#FF4BC1] rounded-full"
-                animate={{ 
-                  opacity: [0.5, 1, 0.5],
-                  scale: [0.8, 1.3, 0.8]
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-              />
-            </motion.span>
-          </motion.h1>
-
-                     {/* Typewriter Tagline */}
-           <motion.div
-             className="h-16 flex items-center justify-center"
-             initial={{ opacity: 0, y: 30 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, delay: 0.9 }}
-           >
-             <div className="text-2xl md:text-3xl lg:text-4xl text-[#1BE7FF] font-light flex items-center gap-3">
-               <span className="font-mono">{typewriterText}</span>
-               <motion.span
-                 className="w-1 h-8 bg-[#1BE7FF]"
-                 animate={{ opacity: [0, 1, 0] }}
-                 transition={{ duration: 1, repeat: Infinity }}
-               />
-             </div>
-           </motion.div>
-
-          {/* Enhanced Subtitle with Animated Phrases */}
-          <motion.div
-            className="text-lg md:text-xl text-[#D9E1EC] mb-12 max-w-3xl mx-auto space-y-2"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-          >
-            <p className="leading-relaxed">
-              Leading the digital transformation across East Africa with innovative solutions in 
-            </p>
-            <motion.div className="flex flex-wrap justify-center gap-4 mt-4">
-              {[
-                { text: "3D design", color: "#B0FF92", delay: 0 },
-                { text: "cloud systems", color: "#1BE7FF", delay: 0.2 },
-                { text: "automation technology", color: "#FF4BC1", delay: 0.4 }
-              ].map((item, index) => (
+            </span>
+          </div>
+          
+          {/* Supporting Text */}
+          <div className="text-lg md:text-xl text-cyan-700 dark:text-cyan-200 font-medium mb-2">
+            Driven by Design. Powered by Innovation.
+          </div>
+          
+          {/* Stained Glass Tags - Optimized animations */}
+          <div className="w-full flex flex-wrap gap-3 mb-2">
+            {STAINED_TAGS.map((tag, i) => {
+              const Icon = tag.icon
+              return (
                 <motion.span
-                  key={index}
-                  className="px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm font-medium"
-                  style={{ color: item.color }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.3 + item.delay, duration: 0.5 }}
-                  whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
+                  key={tag.label}
+                  className={`flex items-center gap-2 px-5 py-2 rounded-full border font-medium shadow-lg hover:scale-105 transition-transform cursor-pointer text-base backdrop-blur-md bg-gradient-to-br ${tag.bg} ${tag.border} ${tag.text}`}
+                  variants={tagVariants}
+                  initial="hidden"
+                  animate="visible"
+                  custom={i}
+                  style={{ boxShadow: '0 2px 16px 0 rgba(0,0,0,0.10), 0 1.5px 8px 0 rgba(0,0,0,0.10)' }}
                 >
-                  {item.text}
+                  <Icon className="w-5 h-5" />
+                  {tag.label}
                 </motion.span>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Premium CTA Buttons */}
+              )
+            })}
+          </div>
+        </div>
+        
+        {/* RIGHT SIDE: Glassmorphism Panel */}
+        <div className="flex-1 flex justify-end w-full">
           <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            className="w-full max-w-4xl min-h-[560px] rounded-3xl border border-gray-200/60 dark:border-white/20 bg-white/60 dark:bg-white/10 backdrop-blur-2xl shadow-2xl flex flex-col items-center justify-center p-10 md:p-16 space-y-4 drop-shadow-2xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <motion.button
-              className="group relative px-10 py-5 bg-gradient-to-r from-[#00B4D8] to-[#1BE7FF] text-white font-bold text-lg rounded-full overflow-hidden"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              {/* Pulse Glow Effect */}
-              <motion.div
-                className="absolute -inset-2 bg-gradient-to-r from-[#00B4D8] to-[#1BE7FF] rounded-full opacity-0 blur-lg"
-                whileHover={{ opacity: 0.7 }}
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              
-              {/* Button Content */}
-              <span className="relative z-10 flex items-center gap-3">
-                <Rocket className="w-5 h-5" />
-                Discover Our Services
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </motion.div>
+            {/* Tagline (large) */}
+            <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white text-center leading-tight">
+              {typed}
+              <span className="inline-block w-3 h-7 align-middle">
+                <span className="inline-block bg-gray-900 dark:bg-white rounded-sm w-1 h-6 ml-1 align-middle" style={{ verticalAlign: 'middle' }}></span>
               </span>
-              
-              {/* Shimmer Effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                animate={{ x: ['-100%', '200%'] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              />
-            </motion.button>
-
-            <motion.button
-              className="group relative flex items-center space-x-3 px-10 py-5 border-2 border-[#1BE7FF]/50 text-[#1BE7FF] font-bold text-lg rounded-full overflow-hidden backdrop-blur-sm"
-              whileHover={{ 
-                scale: 1.05, 
-                y: -3,
-                boxShadow: "0 10px 30px rgba(27, 231, 255, 0.3)"
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToTechnology}
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              <motion.div
-                className="flex items-center space-x-3"
-                animate={isHovering ? { x: [0, 3, 0] } : {}}
-                transition={{ duration: 0.4 }}
+            </h2>
+            
+            {/* Subheading */}
+            <div className="text-lg md:text-xl text-cyan-700 dark:text-cyan-200 font-medium text-center mt-1">
+              Smart solutions in automation, cloud, 3D, and IT systems.
+            </div>
+            
+            {/* Paragraph Description */}
+            <p className="text-base md:text-lg text-gray-700 dark:text-blue-100 text-center max-w-2xl leading-relaxed mt-2">
+              At Ovid International, we design and deploy future-ready digital solutions<br />
+              to help African businesses scale with confidence — from 3D design to low-code automation.
+            </p>
+            
+            {/* CTA Buttons - Optimized for performance */}
+            <div className="flex flex-col md:flex-row gap-4 w-full justify-center mt-4">
+              <button
+                className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white dark:text-white font-semibold rounded-full shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                onClick={() => document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Sparkles className="w-5 h-5" />
-                <span>Explore Our Technology</span>
-                <ChevronDown className="w-4 h-4" />
-              </motion.div>
-              
-              {/* 3D Press Effect */}
-              <motion.div
-                className="absolute inset-0 border-2 border-[#1BE7FF] rounded-full opacity-0"
-                whileHover={{ opacity: 0.3, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.button>
+                Services
+              </button>
+              <button
+                className="px-8 py-4 bg-transparent border border-cyan-400 text-cyan-700 dark:text-cyan-200 font-semibold rounded-full hover:bg-cyan-400/10 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                onClick={() => document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Technology
+              </button>
+              <button
+                className="px-6 py-3 bg-gray-100/60 dark:bg-white/10 border border-gray-200/60 dark:border-white/20 text-gray-900 dark:text-white font-semibold rounded-full hover:bg-gray-200/80 dark:hover:bg-white/20 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/30 text-base"
+                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Book Call
+              </button>
+            </div>
           </motion.div>
-        </motion.div>
-
-         {/* Scroll Indicator - Outside main content */}
-         <motion.div
-           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30"
-           initial={{ opacity: 0 }}
-           animate={{ opacity: 1 }}
-           transition={{ delay: 2 }}
-         >
-           <motion.button
-             onClick={scrollToNext}
-             className="flex flex-col items-center text-[#1BE7FF] hover:text-white transition-colors"
-             animate={{ y: [0, 10, 0] }}
-             transition={{ duration: 2, repeat: Infinity }}
-           >
-             <span className="text-sm mb-2 font-medium">Scroll to explore</span>
-             <ChevronDown className="w-6 h-6" />
-           </motion.button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   )
 }

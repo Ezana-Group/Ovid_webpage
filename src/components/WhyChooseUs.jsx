@@ -46,117 +46,22 @@ const WhyChooseUs = () => {
     }
   ]
 
-  const achievements = [
-    { number: "150+", label: "Projects Delivered", icon: Trophy },
-    { number: "50+", label: "Happy Clients", icon: Users },
-    { number: "99.9%", label: "Client Satisfaction", icon: Shield },
-    { number: "24/7", label: "Support Available", icon: Clock }
-  ]
-
   return (
-    <section id="why-choose-us" className="py-20 lg:py-32 bg-white dark:bg-gray-900 relative overflow-hidden">
-      {/* Subtle Colorful Shadows */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Large Floating Gradient Orbs */}
-        <motion.div
-          className="absolute w-[450px] h-[450px] rounded-full opacity-15 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(29, 45, 80, 0.25) 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%)',
-            top: '15%',
-            left: '15%',
-          }}
-          animate={{
-            x: [0, 40, -25, 0],
-            y: [0, -30, 45, 0],
-            scale: [0.9, 1.0, 0.85, 0.9],
-          }}
-          transition={{
-            duration: 28,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
+    <section id="why-choose-us" className="py-16 lg:py-24 bg-white dark:bg-[#10102a] relative overflow-hidden">
+      {/* Colorful Blob Background */}
+      <div className="absolute inset-0">
+        {/* Animated Colorful Blobs */}
+        <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-24 right-16 w-80 h-80 bg-gradient-to-r from-violet-400 to-purple-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 right-20 w-72 h-72 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full blur-3xl opacity-20 animate-pulse delay-2000"></div>
+        <div className="absolute bottom-40 left-1/3 w-64 h-64 bg-gradient-to-r from-rose-400 to-pink-400 rounded-full blur-3xl opacity-20 animate-pulse delay-3000"></div>
+        <div className="absolute top-32 left-1/2 w-56 h-56 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full blur-3xl opacity-20 animate-pulse delay-1500"></div>
         
-        <motion.div
-          className="absolute w-[380px] h-[380px] rounded-full opacity-18 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(0, 180, 216, 0.2) 0%, rgba(6, 182, 212, 0.12) 50%, transparent 100%)',
-            bottom: '20%',
-            right: '20%',
-          }}
-          animate={{
-            x: [0, -45, 35, 0],
-            y: [0, 50, -40, 0],
-            scale: [0.8, 1.1, 0.9, 0.8],
-          }}
-          transition={{
-            duration: 32,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 8
-          }}
-        />
-        
-        <motion.div
-          className="absolute w-[320px] h-[320px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(5, 150, 105, 0.12) 50%, transparent 100%)',
-            top: '55%',
-            left: '55%',
-          }}
-          animate={{
-            x: [0, -25, 20, 0],
-            y: [0, 30, -20, 0],
-            scale: [0.95, 0.8, 1.05, 0.95],
-          }}
-          transition={{
-            duration: 24,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 4
-          }}
-        />
-        
-        {/* Smaller Floating Elements */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-24 h-24 rounded-full opacity-12 blur-2xl"
-            style={{
-              background: `hsl(${(i * 45) % 360}, 65%, 65%)`,
-              top: `${20 + (i * 8)}%`,
-              left: `${15 + (i * 10)}%`,
-            }}
-            animate={{
-              x: [0, Math.cos(i) * 15, Math.sin(i) * 12, 0],
-              y: [0, Math.sin(i) * 20, Math.cos(i) * 15, 0],
-              scale: [0.8, 1.0, 0.9, 0.8],
-              opacity: [0.08, 0.15, 0.12, 0.08],
-            }}
-            transition={{
-              duration: 18 + i * 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 2.5
-            }}
-          />
-        ))}
-        
-        {/* Layered Mesh Gradient Background */}
-        <div 
-          className="absolute inset-0 opacity-6"
-          style={{
-            background: `
-              radial-gradient(circle at 25% 25%, rgba(29, 45, 80, 0.08) 0%, transparent 45%),
-              radial-gradient(circle at 75% 75%, rgba(0, 180, 216, 0.08) 0%, transparent 45%),
-              radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
-              radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 45%)
-            `
-          }}
-        />
+        {/* Glass Overlay */}
+        <div className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-sm"></div>
       </div>
 
-      <div ref={ref} className="container-max section-padding relative z-10">
+      <div ref={ref} className="container-max relative z-10 py-16 lg:py-24">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -164,40 +69,47 @@ const WhyChooseUs = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+          <motion.div
+            className="bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-gray-200/60 dark:border-white/20 shadow-xl max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Why Choose <span className="gradient-text">Ovid International</span>
-          </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            We combine technical excellence, innovative solutions, and unmatched customer service to deliver results that exceed expectations.
-          </motion.p>
+            <motion.h2
+              className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Why Choose <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Ovid International</span>
+            </motion.h2>
+            <motion.p
+              className="text-xl text-gray-700 dark:text-blue-100 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              We combine technical excellence, innovative solutions, and unmatched customer service to deliver results that exceed expectations.
+            </motion.p>
+          </motion.div>
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
               <motion.div
                 key={index}
-                className="group relative p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700"
+                className="group relative p-6 bg-white/60 dark:bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/60 dark:border-white/20 hover:bg-white/80 dark:hover:bg-white/20"
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                whileHover={{ y: -8, scale: 1.03 }}
               >
                 {/* Icon */}
                 <motion.div
-                  className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-blue rounded-xl mb-4"
+                  className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-blue rounded-xl mb-4 shadow-lg"
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -210,13 +122,13 @@ const WhyChooseUs = () => {
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                <p className="text-gray-700 dark:text-blue-100 mb-4 leading-relaxed">
                   {feature.description}
                 </p>
 
                 {/* Stats */}
                 <div className="flex items-center space-x-2">
-                  <div className="text-2xl font-bold gradient-text">
+                  <div className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                     {feature.stats}
                   </div>
                 </div>
@@ -228,55 +140,12 @@ const WhyChooseUs = () => {
           })}
         </div>
 
-        {/* Achievements Section */}
-        <motion.div
-          className="bg-gradient-to-r from-primary-500 to-accent-blue rounded-3xl p-8 lg:p-12 text-white"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <div className="text-center mb-12">
-            <h3 className="text-3xl lg:text-4xl font-bold mb-4">
-              Our Achievements
-            </h3>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Numbers that speak for our commitment to excellence and client satisfaction.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {achievements.map((achievement, index) => {
-              const Icon = achievement.icon
-              return (
-                <motion.div
-                  key={index}
-                  className="text-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl mb-4">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold mb-2">
-                    {achievement.number}
-                  </div>
-                  <div className="text-white/90 font-medium">
-                    {achievement.label}
-                  </div>
-                </motion.div>
-              )
-            })}
-          </div>
-        </motion.div>
-
         {/* CTA Section */}
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
           <motion.button
             className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-blue text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
